@@ -2,3 +2,4 @@
 hiroyukitanaka
 misatookamoto
 okuyamahiroki
+kanetsukiyuuki
