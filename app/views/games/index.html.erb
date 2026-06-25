@@ -1,0 +1,8 @@
+<h1>シャリ打</h1>
+<h1><%= @word %></h1>
+
+
+<%= form_with url: check_path, method: :post do |f| %>
+  <%= f.text_field :answer %>
+  <%= f.submit "回答" %>
+<% end %>
