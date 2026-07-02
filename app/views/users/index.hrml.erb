@@ -1,0 +1,14 @@
+<h1>ユーザー一覧</h1>
+
+<table border="1">
+  <tr>
+    <th>名前</th>
+    <th>操作</th>
+  </tr>
+
+<% if current_user %>
+  <%= button_to "アカウント削除",
+      user_path(current_user),
+      method: :delete,
+      data: { turbo_confirm: "本当に削除しますか？" } %>
+<% end %></table>

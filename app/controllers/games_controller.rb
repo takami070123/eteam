@@ -1,9 +1,10 @@
 class GamesController < ApplicationController
   WORDS = [
-    "isu", "neko", "mimi", "ido",
-    "koin", "tonbo", "suzume",
-    "muetai", "takoyaki",
-    "sa-kasu", "akihabara", "moaizou"
+    "f" , "j"
+    # "isu", "neko", "mimi", "ido", "takami", 
+    # "koin", "tonbo", "suzume", "ueda",
+    # "muetai", "takoyaki", "kanetsuki",
+    # "sa-kasu", "akihabara", "moaizou"
   ]
 
   LIMIT_TIME = 30
@@ -64,8 +65,11 @@ class GamesController < ApplicationController
     user = User.find_by(id: session[:user_id])
     return unless user
 
-    if session[:score].to_i > user.high_score.to_i
-      user.update(high_score: session[:score])
-    end
+    if session[:score] > user.high_score.to_i
+      user.update(
+      high_score: session[:score],
+      high_score_date: Time.current
+      )
+    end  
   end
 end
