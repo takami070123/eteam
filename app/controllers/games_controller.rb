@@ -40,11 +40,11 @@ class GamesController < ApplicationController
 
   # 結果画面
   def result
-    @score = session[:score]
-    @count = session[:count]
-    @miss  = session[:miss]
+    @count = session[:final_count] || session[:count] || 0
+    @score = session[:final_score] || session[:score] || 0
+    @miss  = session[:final_miss]  || session[:miss]  || 0
 
-    reset_session
+    @users = User.order(high_score: :desc)
   end
 
   def finish

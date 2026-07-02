@@ -1,6 +1,44 @@
-<h1>ゲーム終了</h1>
+<h1>ゲーム終了！</h1>
 
-<p><%= @score %>ポイント獲得！</p>
-<p><%= @miss %>回ミス</p>
+<h2>今回の結果</h2>
+
+<table border="1">
+  <tr>
+    <th>項目</th>
+    <th>結果</th>
+  </tr>
+  <tr>
+    <td>ミス</td>
+    <td><%= @miss %>回</td>
+  </tr>
+  <tr>
+    <td>スコア</td>
+    <td><%= @score %>点</td>
+  </tr>
+</table>
+
+<br>
+
+<h2>ランキング</h2>
+
+<table border="1">
+  <tr>
+    <th>順位</th>
+    <th>名前</th>
+    <th>ハイスコア</th>
+    <th>更新日時</th>
+  </tr>
+
+  <% @users.each_with_index do |user, i| %>
+    <tr <% if current_user == user %>style="background-color:#ffff99;"<% end %>>
+      <td><%= i + 1 %></td>
+      <td><%= user.name %></td>
+      <td><%= user.high_score %></td>
+      <td><%= user.high_score_date&.in_time_zone("Asia/Tokyo")&.strftime("%Y/%m/%d %H:%M") || "-" %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
 
 <%= link_to "もう一度遊ぶ", start_path %>
