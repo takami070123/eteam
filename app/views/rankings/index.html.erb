@@ -1,0 +1,21 @@
+<h1>ランキング</h1>
+
+<table border="1">
+  <tr>
+    <th>順位</th>
+    <th>名前</th>
+    <th>ハイスコア</th>
+  </tr>
+
+  <% @users.each_with_index do |user, i| %>
+    <tr>
+      <td><%= i + 1 %></td>
+      <td><%= user.name %></td>
+      <td><%= user.high_score %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
+
+<%= link_to "スタート画面へ戻る", start_path %>

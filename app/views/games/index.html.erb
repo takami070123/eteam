@@ -1,8 +1,15 @@
-<h1>シャリ打</h1>
-<h1><%= @word %></h1>
+<h2>残り時間：<span id="timer">30</span></h2>
 
+<h2>スコア：<span id="score">0</span></h2>
 
-<%= form_with url: check_path, method: :post do |f| %>
-  <%= f.text_field :answer %>
-  <%= f.submit "回答" %>
-<% end %>
+<h1 id="word"></h1>
+
+<input
+type="text"
+id="answer"
+autocomplete="off">
+
+<div
+  id="words"
+  data-words='<%= @words.to_json %>'>
+</div>
