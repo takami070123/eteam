@@ -8,7 +8,12 @@
 <%= link_to "ランキング", ranking_path %>
 <br>
 
+<% if current_user.present? %>
+  <%= button_to "アカウント削除",
+      user_path(current_user),
+      method: :delete,
+      data: { turbo_confirm: "本当にアカウントを削除しますか？" } %>
+<% end %>
 <br>
-<%= button_to "アカウント削除", user_path(current_user), method: :delete, data: { turbo_confirm: "本当にアカウントを削除しますか？この操作は元に戻せません。" } %>
-<br>
+
 <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>

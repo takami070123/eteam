@@ -14,7 +14,7 @@
         <td><%= user.name %></td>
         <td><%= user.high_score %></td>
         <td><%= user.high_score_date&.in_time_zone("Asia/Tokyo")&.strftime("%Y/%m/%d %H:%M") || "-" %></td>   
-        </tr>
+    </tr>
   <% end %>
 </table>
 
