@@ -5,14 +5,16 @@
     <th>順位</th>
     <th>名前</th>
     <th>ハイスコア</th>
+    <th>更新日時</th>
   </tr>
 
   <% @users.each_with_index do |user, i| %>
     <tr>
-      <td><%= i + 1 %></td>
-      <td><%= user.name %></td>
-      <td><%= user.high_score %></td>
-    </tr>
+        <td><%= i + 1 %></td>
+        <td><%= user.name %></td>
+        <td><%= user.high_score %></td>
+        <td><%= user.high_score_date&.in_time_zone("Asia/Tokyo")&.strftime("%Y/%m/%d %H:%M") || "-" %></td>   
+        </tr>
   <% end %>
 </table>
 

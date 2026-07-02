@@ -14,6 +14,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    user = User.find(session[:user_id])
+
+    user.destroy
+
+    reset_session
+
+    redirect_to root_path, notice: "アカウントを削除しました。"
+  end
+  
   private
 
   def user_params
