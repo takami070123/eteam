@@ -6,39 +6,66 @@ class GamesController < ApplicationController
     "sa-kasu", "akihabara", "moaizou"
   ]
 
+  LIMIT_TIME = 30
+
+  # スタート画面
+  def start
+  end
+
+  # ゲーム開始
+  def start_game
+    session[:score] = 0
+    session[:count] = 0
+    session[:miss] = 0
+
+    redirect_to game_path
+  end
+
+  # ゲーム画面
   def index
-    session[:score] ||= 0
-    session[:count] ||= 0
+    @words = WORDS
+    @limit_time = LIMIT_TIME
+  end
+  # ゲーム終了
+  def finish
+    session[:score] = params[:score].to_i
+    session[:count] = params[:count].to_i
+    session[:miss]  = params[:miss].to_i
 
-    @word = WORDS.sample
-    session[:answer] = @word
+    save_result
+
+    head :ok
   end
 
-  def check
-    answer = params[:answer]
-    correct = session[:answer]
-
-    if answer == correct
-      session[:count] += 1
-      session[:score] += 100
-
-      if WORDS.index(correct) > 5
-        session[:score] += 180
-      end
-
-      redirect_to root_path
-    else
-      session[:final_count] = session[:count]
-      session[:final_score] = session[:score]
-
-      redirect_to result_path
-    end
-  end
-
+  # 結果画面
   def result
-    @count = session[:final_count]
-    @score = session[:final_score]
+    @score = session[:score]
+    @count = session[:count]
+    @miss  = session[:miss]
 
     reset_session
+  end
+
+  def finish
+    session[:score] = params[:score].to_i
+    session[:count] = params[:count].to_i
+    session[:miss]  = params[:miss].to_i
+
+    save_result
+
+    head :ok
+  end
+
+  private
+
+  def save_result
+    return unless session[:user_id]
+
+    user = User.find_by(id: session[:user_id])
+    return unless user
+
+    if session[:score].to_i > user.high_score.to_i
+      user.update(high_score: session[:score])
+    end
   end
 end
