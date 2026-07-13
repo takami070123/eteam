@@ -1,15 +1,17 @@
-<h2>残り時間：<span id="timer">30</span></h2>
+<div data-turbo="false">
+  <h2>残り時間：<span id="timer">3</span></h2>
 
-<h2>スコア：<span id="score">0</span></h2>
+  <h2>スコア：<span id="score">0</span></h2>
 
-<h1 id="word"></h1>
+  <h1 id="word"></h1>
 
-<input
-type="text"
-id="answer"
-autocomplete="off">
+  <input
+    type="text"
+    id="answer"
+    autocomplete="off">
 
-<div
-  id="words"
-  data-words='<%= @words.to_json %>'>
+  <div
+    id="words"
+    data-words='<%= @words.to_json %>'>
+  </div>
 </div>

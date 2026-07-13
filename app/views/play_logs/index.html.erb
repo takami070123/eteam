@@ -1,0 +1,23 @@
+<h1>週間ランキング</h1>
+
+<table>
+  <tr>
+    <th>順位</th>
+    <th>名前</th>
+    <th>スコア</th>
+    <th>正解数</th>
+    <th>ミス数</th>
+    <th>日時</th>
+  </tr>
+
+  <% @weekly_ranking.each_with_index do |log, i| %>
+    <tr>
+      <td><%= i + 1 %></td>
+      <td><%= log.user.name %></td>
+      <td><%= log.score %></td>
+      <td><%= log.correct_count %></td>
+      <td><%= log.miss_count %></td>
+      <td><%= log.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+    </tr>
+  <% end %>
+</table>

@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_07_02_045323) do
+ActiveRecord::Schema[7.1].define(version: 2026_07_09_005236) do
+  create_table "play_logs", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "score", null: false
+    t.integer "correct_count", null: false
+    t.integer "miss_count", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_play_logs_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
@@ -20,4 +30,12 @@ ActiveRecord::Schema[7.1].define(version: 2026_07_02_045323) do
     t.datetime "high_score_date"
   end
 
+  create_table "words", force: :cascade do |t|
+    t.string "word", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["word"], name: "index_words_on_word", unique: true
+  end
+
+  add_foreign_key "play_logs", "users", on_update: :cascade, on_delete: :cascade
 end
