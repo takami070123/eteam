@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root "home#index"
 
   # ゲーム関連
-  get  "start",       to: "games#start"
   get  "game",        to: "games#index"
   post "game/start",  to: "games#start_game"
   post "check",       to: "games#check"

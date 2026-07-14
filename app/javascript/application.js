@@ -34,7 +34,7 @@ document.addEventListener("turbo:load", () => {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       if (confirm("ゲームを中断しますか？")) {
-        window.location.href = "/start";
+        window.location.href = "/";
       }
     }
   });

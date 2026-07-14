@@ -7,7 +7,7 @@ def create
 
   if user&.authenticate(params[:password])
     session[:user_id] = user.id
-    redirect_to start_path
+    redirect_to root_path
   else
     flash[:alert] = "ユーザー名またはパスワードが違います"
     render :new, status: :unprocessable_entity

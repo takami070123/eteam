@@ -1,4 +1,4 @@
-<h1>ユーザー登録</h1>
+<h1>登録画面</h1>
 
 <%= form_with model: @user do |f| %>
 
@@ -8,9 +8,10 @@
   <p>パスワード<br>
   <%= f.password_field :password %></p><br>
 
-  <p>パスワード確認<br>
-  <%= f.password_field :password_confirmation %></p><br>
-
-  <%= f.submit "登録" %>
+  <%= f.submit "新規登録" %>
 
 <% end %>
+
+<p>
+  <%= link_to "ログイン", login_path %>
+</p>

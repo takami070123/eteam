@@ -4,9 +4,6 @@ class GamesController < ApplicationController
 
   LIMIT_TIME = 30
 
-  def start
-  end
-
   def start_game
     session[:score] = 0
     session[:count] = 0
@@ -54,11 +51,5 @@ class GamesController < ApplicationController
   @correct = session[:last_correct]
   @miss = session[:last_miss]
 end
-
-  private
-
-  def require_login
-    redirect_to login_path unless session[:user_id]
-  end
 end
 

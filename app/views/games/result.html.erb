@@ -1,23 +1,11 @@
-<h1>ゲーム終了！</h1>
+<h1>結果</h1>
 
-<h2>今回の結果</h2>
+<h2>スコア：<%= @score %>点</h2>
 
-<table border="1">
-  <tr>
-    <th>項目</th>
-    <th>結果</th>
-  </tr>
-  <tr>
-    <td>ミス</td>
-    <td><%= @miss %>回</td>
-  </tr>
-  <tr>
-    <td>スコア</td>
-    <td><%= @score %>点</td>
-  </tr>
-</table>
+<%= button_to "もう一度", game_start_path, method: :post %>
 
 <br>
+<%= link_to "ランキング一覧", ranking_path %>
+<br>
 
-
-<%= link_to "もう一度遊ぶ", start_path %>
+<%= link_to "HOME", root_path %>
