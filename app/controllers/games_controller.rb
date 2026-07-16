@@ -1,75 +1,55 @@
 class GamesController < ApplicationController
-  WORDS = [
-    "f" , "j"
-    # "isu", "neko", "mimi", "ido", "takami", 
-    # "koin", "tonbo", "suzume", "ueda",
-    # "muetai", "takoyaki", "kanetsuki",
-    # "sa-kasu", "akihabara", "moaizou"
-  ]
+  skip_before_action :verify_authenticity_token, only: [:finish]
+  before_action :require_login
 
   LIMIT_TIME = 30
 
-  # スタート画面
-  def start
-  end
-
-  # ゲーム開始
   def start_game
     session[:score] = 0
     session[:count] = 0
-    session[:miss] = 0
+    session[:miss]  = 0
 
     redirect_to game_path
   end
 
-  # ゲーム画面
   def index
-    @words = WORDS
+    @words = Word.pluck(:word)
     @limit_time = LIMIT_TIME
   end
-  # ゲーム終了
-  def finish
-    session[:score] = params[:score].to_i
-    session[:count] = params[:count].to_i
-    session[:miss]  = params[:miss].to_i
-
-    save_result
-
-    head :ok
-  end
-
-  # 結果画面
-  def result
-    @count = session[:final_count] || session[:count] || 0
-    @score = session[:final_score] || session[:score] || 0
-    @miss  = session[:final_miss]  || session[:miss]  || 0
-
-    @users = User.order(high_score: :desc)
-  end
 
   def finish
-    session[:score] = params[:score].to_i
-    session[:count] = params[:count].to_i
-    session[:miss]  = params[:miss].to_i
+    Rails.logger.info "=== FINISH PARAMS === #{params.inspect}"
+    score   = params[:score].to_i
+    correct = params[:correct_count].to_i
+    miss    = params[:miss_count].to_i
 
-    save_result
+    PlayLog.create!(
+      user_id: session[:user_id],
+      score: score,
+      correct_count: correct,
+      miss_count: miss
+    )
 
-    head :ok
-  end
+    user = User.find(session[:user_id])
 
-  private
-
-  def save_result
-    return unless session[:user_id]
-
-    user = User.find_by(id: session[:user_id])
-    return unless user
-
-    if session[:score] > user.high_score.to_i
+    if user.high_score.nil? || score > user.high_score
       user.update(
-      high_score: session[:score],
-      high_score_date: Time.current
+        high_score: score,
+        high_score_date: Time.current
       )
-    end  
+    end
+
+    session[:last_score]   = score
+    session[:last_correct] = correct
+    session[:last_miss]    = miss
+
+    redirect_to result_path
   end
+
+  def result
+  @score = session[:last_score]
+  @correct = session[:last_correct]
+  @miss = session[:last_miss]
 end
+end
+

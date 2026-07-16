@@ -1,0 +1,2 @@
+module PlayLogsHelper
+end

@@ -1,0 +1,51 @@
+<h1>ランキング</h1>
+
+<h2>自分のスコア</h2>
+
+<% if @my_best %>
+  <table border="1">
+    <tr>
+      <th>順位</th>
+      <th>名前</th>
+      <th>スコア</th>
+      <th>日時</th>
+    </tr>
+    <tr>
+      <td><%= @my_rank %></td>
+      <td><%= @my_best.user.name %></td>
+      <td><%= @my_best.score %></td>
+      <td><%= @my_best.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+    </tr>
+  </table>
+<% else %>
+  <p>まだプレイ記録がありません。</p>
+<% end %>
+
+<h2>ランキング一覧</h2>
+
+<table border="1">
+  <tr>
+    <th>順位</th>
+    <th>名前</th>
+    <th>スコア</th>
+    <th>日時</th>
+  </tr>
+
+  <% @weekly_ranking.each_with_index do |log, i| %>
+    <tr>
+      <td><%= i + 1 %></td>
+      <td><%= log.user.name %></td>
+      <td><%= log.score %></td>
+      <td><%= log.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
+
+<% if session[:last_score] %>
+  <%= link_to "結果に戻る", result_path %>
+  <br>
+<% end %>
+
+<%= link_to "HOME", root_path %>

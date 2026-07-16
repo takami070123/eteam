@@ -18,7 +18,7 @@ document.addEventListener("turbo:load", () => {
   let index = 0;
   let point = 0;
   let miss = 0;
-  let remaining = 30;
+  let remaining = 3;
 
   // ===== 最初の問題 =====
   word.textContent = words[index];
@@ -34,7 +34,7 @@ document.addEventListener("turbo:load", () => {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       if (confirm("ゲームを中断しますか？")) {
-        window.location.href = "/start";
+        window.location.href = "/";
       }
     }
   });
@@ -92,28 +92,24 @@ document.addEventListener("turbo:load", () => {
   });
 
   // ===== 終了 =====
-  function finishGame() {
+function finishGame() {
+  console.log("FINISH GAME CALLED");
 
-    fetch("/finish", {
+  const formData = new FormData();
+  formData.append("score", point);
+  formData.append("correct_count", index);
+  formData.append("miss_count", miss);
 
-      method: "POST",
-
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token":
-          document.querySelector('meta[name="csrf-token"]').content
-      },
-
-      body: JSON.stringify({
-        score: point,
-        count: index,
-        miss: miss
-      })
-
-    }).then(() => {
-      location.href = "/result";
-    });
-
-  }
-
+  fetch("/finish", {
+    method: "POST",
+    body: formData
+  })
+  .then(response => {
+    console.log("FETCH SUCCESS:", response.status);
+    window.location.href = "/result";
+  })
+  .catch(err => {
+    console.error("FETCH ERROR:", err);
+  });
+}
 });
