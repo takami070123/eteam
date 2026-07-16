@@ -9,8 +9,89 @@ words = %w[
   hello
   ruby
   rails
+  tiger
+  lion
+  mouse
+  keyboard
+  monitor
+  window
+  cloud
+  river
+  ocean
+  mountain
+  forest
+  desert
+  sky
+  star
+  planet
+  space
+  rocket
+  light
+  shadow
+  speed
+  quick
+  slow
+  happy
+  smile
+  laugh
+  world
+  earth
+  music
+  sound
+  voice
+  power
+  energy
+  magic
+  fire
+  water
+  wind
+  stone
+  metal
+  gold
+  silver
+  bronze
+  green
+  blue
+  red
+  yellow
+  purple
+  orange
+  black
+  white
+  gray
+  pink
+  jump
+  run
+  walk
+  drive
+  fly
+  swim
+  read
+  write
+  code
+  debug
+  build
+  start
+  finish
+  score
+  level
+  stage
+  bonus
+  combo
+  perfect
+  miss
+  attack
+  guard
+  skill
+  item
+  quest
+  hero
+  enemy
+  boss
+  clear
+  retry
 ]
 
 words.each do |w|
-  Word.create!(word: w)
+  Word.find_or_create_by!(word: w)
 end

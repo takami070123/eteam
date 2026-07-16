@@ -12,8 +12,14 @@ document.addEventListener("turbo:load", () => {
 
   if (!input || !wordsData) return;
 
-  // ===== 単語一覧 =====
-  const words = JSON.parse(wordsData.dataset.words);
+// ===== 単語一覧 =====
+const words = JSON.parse(wordsData.dataset.words);
+
+// シャッフル（Fisher–Yates）
+for (let i = words.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [words[i], words[j]] = [words[j], words[i]];
+}
 
   let index = 0;
   let point = 0;
