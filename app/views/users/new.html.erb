@@ -1,5 +1,13 @@
 <h1>登録画面</h1>
-
+<% if @user.errors.any? %>
+  <div style="color: red;">
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <%= form_with model: @user do |f| %>
 
   <p>名前<br>
