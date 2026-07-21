@@ -25,6 +25,15 @@ document.addEventListener("turbo:load", () => {
   // ===========================
   const words = JSON.parse(wordsData.dataset.words);
 
+  // ===== ランダムシャッフル =====
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
   // ===========================
   // ゲームで使用する変数
   // ===========================
