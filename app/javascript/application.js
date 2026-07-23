@@ -188,3 +188,22 @@ document.addEventListener("turbo:load", () => {
   }
 
 });
+
+document.addEventListener("turbo:load", () => {
+  const box = document.querySelector(".home-container");
+  const inner = document.querySelector(".home-container-padding");
+  if (!box || !inner) return;
+
+  const contentHeight = inner.scrollHeight;     // 中身の高さ
+  const screenHeight = window.innerHeight * 0.96; // 85vh と同じ
+
+  if (contentHeight <= screenHeight) {
+    // 中身が画面に収まる → 中央揃え
+    box.classList.add("home-center");
+    box.style.overflowY = "hidden";
+  } else {
+    // 中身が画面に収まらない → スクロール
+    box.classList.remove("home-center");
+    box.style.overflowY = "auto";
+  }
+});

@@ -13,12 +13,12 @@
  *= require_tree .
  *= require_self
  */
- .home-container-padding {
-  max-height: 85vh;          /* ← 画面高さに応じて縮小 */
+.home-container-padding {
   padding: clamp(15px, 4vw, 30px);
-  overflow-y: auto;
-
+  overflow: visible;   /* ← スクロール禁止 */
+  max-height: none;    /* ← これが最重要 */
 }
+
 
 
 body {
@@ -47,13 +47,12 @@ body {
 
   background: rgba(255,255,255,0.75);
   width: min(600px, 92vw);   /* ← 画面幅に応じて縮小 */
-  max-height: 85vh;          /* ← 画面高さに応じて縮小 */
-  padding: clamp(15px, 4vw, 30px);
+  max-height: 96vh;          /* ← 画面高さに応じて縮小 */
+  padding: clamp(15px, 20px, 30px);
   border-radius: 20px;
   text-align: center;
   box-sizing: border-box;
-  
-  overflow-y: auto;       /* ← 中身だけスクロール */
+
   overflow-x: hidden;
 }
 
