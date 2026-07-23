@@ -1,19 +1,21 @@
 <div data-turbo="false" class="home-container">
-  <%= link_to "HOME", root_path %>
+  <div class="home-container-padding">
+    <%= link_to "HOME", root_path %>
 
-  <h2>残り時間：<span id="timer">30</span></h2>
+    <h2>残り時間：<span id="timer">30</span></h2>
 
-  <h2>スコア：<span id="score">0</span></h2>
+    <h2>スコア：<span id="score">0</span></h2>
 
-  <h1 id="word"></h1>
+    <h1 id="word"></h1>
 
-  <input
-    type="text"
-    id="answer"
-    autocomplete="off">
+    <input
+      type="text"
+      id="answer"
+      autocomplete="off">
 
-  <div
-    id="words"
-    data-words='<%= @words.to_json %>'>
+    <div
+      id="words"
+      data-words='<%= @words.to_json %>'>
+    </div>
   </div>
 </div>

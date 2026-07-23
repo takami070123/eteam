@@ -1,58 +1,59 @@
 <div class="home-container">
-<h1>ランキング</h1>
+    <h1>ランキング</h1>
 
-<h2>自分の最高スコア</h2>
+    <h2>自分の最高スコア</h2>
 
-<% if @my_best %>
-  <table border="1">
-    <tr>
-      <th>順位</th>
-      <th>名前</th>
-      <th>スコア</th>
-      <th>日時</th>
-    </tr>
-    <tr>
-      <td><%= @my_rank %></td>
-      <td><%= @my_best.user.name %></td>
-      <td><%= @my_best.score %></td>
-      <td><%= @my_best.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-    </tr>
-  </table>
-<% else %>
-  <p>まだプレイ記録がありません。</p>
-<% end %>
+    <% if @my_best %>
+      <table border="1">
+        <tr>
+          <th>順位</th>
+          <th>名前</th>
+          <th>スコア</th>
+          <th>日時</th>
+        </tr>
+        <tr>
+          <td><%= @my_rank %></td>
+          <td><%= @my_best.user.name %></td>
+          <td><%= @my_best.score %></td>
+          <td><%= @my_best.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        </tr>
+      </table>
+    <% else %>
+      <p>まだプレイ記録がありません。</p>
+    <% end %>
 
-<h2>ランキング一覧</h2>
+    <h2>ランキング一覧</h2>
 
-<table border="1">
-  <tr>
-    <th>順位</th>
-    <th>名前</th>
-    <th>スコア</th>
-    <th>日時</th>
-  </tr>
+    <table border="1">
+      <tr>
+        <th>順位</th>
+        <th>名前</th>
+        <th>スコア</th>
+        <th>日時</th>
+      </tr>
 
-    <% rank = 0 %>
-    <% prev_score = nil %>
-    <% @weekly_ranking.each.with_index(1) do |log, i| %>
-    <tr>
-      <% if log.score != prev_score %>
-        <% rank = i %>
-        <% prev_score = log.score %>
+        <% rank = 0 %>
+        <% prev_score = nil %>
+        <% @weekly_ranking.each.with_index(1) do |log, i| %>
+        <tr>
+          <% if log.score != prev_score %>
+            <% rank = i %>
+            <% prev_score = log.score %>
+          <% end %>
+          <td><%= rank %></td>
+          <td><%= log.user.name %></td>
+          <td><%= log.score %></td>
+          <td><%= log.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        </tr>
       <% end %>
-      <td><%= rank %></td>
-      <td><%= log.user.name %></td>
-      <td><%= log.score %></td>
-      <td><%= log.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-    </tr>
-  <% end %>
-</table>
+    </table>
 
-<br>
+    <br>
 
-<% if session[:last_score] %>
-  <%= link_to "結果に戻る", result_path %>
-  <br>
-<% end %>
+    <% if session[:last_score] %>
+      <%= link_to "結果に戻る", result_path %>
+      <br>
+    <% end %>
 
-<%= link_to "HOME", root_path %>
+    <%= link_to "HOME", root_path %>
+</div>

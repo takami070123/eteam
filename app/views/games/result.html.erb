@@ -1,13 +1,15 @@
 <div class="home-container">
-<h1>結果</h1>
+    <div class="home-container-padding">
+        <h1>結果</h1>
 
-<h2>スコア：<%= @score %>点</h2>
+        <h2>スコア：<%= @score %>点</h2>
 
-<%= button_to "もう一度", game_start_path, method: :post %>
+        <%= button_to "もう一度", game_start_path, method: :post %>
 
-<br>
-<%= link_to "ランキング一覧", ranking_path %>
-<br>
+        <br>
+        <%= link_to "ランキング一覧", ranking_path %>
+        <br>
 
-<%= link_to "HOME", root_path %>
+        <%= link_to "HOME", root_path %>
+    </div>
 </div>
