@@ -24,6 +24,8 @@ document.addEventListener("turbo:load", () => {
   // data-words属性に保存されているJSONデータを配列へ変換
   // ===========================
   const words = JSON.parse(wordsData.dataset.words);
+  const correctSound = new Audio("/assets/correct.mp3");
+  const missSound = new Audio("/assets/キャンセル.mp3");
 
   // ===== ランダムシャッフル =====
   function shuffle(array) {
@@ -33,6 +35,9 @@ document.addEventListener("turbo:load", () => {
     }
     return array;
   }
+
+  // ★ シャッフルを実行
+  shuffle(words);
 
   // ===========================
   // ゲームで使用する変数
@@ -108,6 +113,10 @@ document.addEventListener("turbo:load", () => {
       // 間違えた文字を削除
       input.value = input.value.slice(0, -1);
 
+      //  ミス音を鳴らす
+      missSound.currentTime = 0;
+      missSound.play();
+
       // ミス回数を増やす
       miss++;
 
@@ -118,6 +127,9 @@ document.addEventListener("turbo:load", () => {
     // 単語を最後まで入力できた
     // ---------------------------
     if (input.value === correct) {
+      // 🔔 正解音を鳴らす
+      correctSound.currentTime = 0;
+      correctSound.play();
 
       // スコア100点追加
       point += 100;

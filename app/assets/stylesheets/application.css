@@ -20,6 +20,7 @@
 
 
  body {
+  overflow: hidden;   /* ← スクロール禁止 */
   margin: 0;
   min-height: 100vh;
 
@@ -33,17 +34,22 @@
 }
 
 .home-container {
-  width: 500px;
-  margin: 80px auto;
-  padding: 30px;
+  position: fixed;        /* 白い枠を固定 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   background: rgba(255,255,255,0.75);
+  width: 600px;
+  height: 70vh;           /* ← 固定高さ（重要） */
+  padding: 30px;
   border-radius: 20px;
-
   text-align: center;
 
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  overflow-y: auto;       /* ← 中身だけスクロール */
+  overflow-x: hidden;
 }
+
 
 .home-container h1 {
   font-size: 40px;
