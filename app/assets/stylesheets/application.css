@@ -108,3 +108,18 @@ body {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/* 中央揃えモード（中身が短いページ用） */
+.home-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  overflow-y: hidden;   /* ← これが最重要！ */
+  overflow-x: hidden;
+
+  max-height: 85vh;
+  max-width: 92vw;
+  box-sizing: border-box;
+}
