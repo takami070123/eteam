@@ -160,6 +160,10 @@ document.addEventListener("turbo:load", () => {
 
     console.log("FINISH GAME CALLED");
 
+    // 🔒 入力を無効化してキー入力も止める
+    input.disabled = true;
+    input.blur(); // ← フォーカスも外す
+
     // サーバへ送信するデータを作成
     const formData = new FormData();
     formData.append("score", point);          // スコア

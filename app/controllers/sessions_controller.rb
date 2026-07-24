@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def new
-    
   end
 
 def create
@@ -10,7 +9,7 @@ def create
     session[:user_id] = user.id
     redirect_to root_path
   else
-    flash[:alert] = "ユーザー名またはパスワードが違います"
+    flash.now[:alert] = "ユーザー名またはパスワードが違います"
     render :new, status: :unprocessable_entity
   end
 end
