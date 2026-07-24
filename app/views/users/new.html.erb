@@ -2,13 +2,9 @@
   <div class="home-container-padding">
     <h1>登録画面</h1>
     <% if @user.errors.any? %>
-      <div style="color: red;">
-        <ul>
-          <% @user.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
+      <% @user.errors.full_messages.each do |message| %>
+        <div class="error-message"><%= message %></div>
+      <% end %>
     <% end %>
     <%= form_with model: @user do |f| %>
 
@@ -16,14 +12,16 @@
       <%= f.text_field :name %>
 
       <p>パスワード</p>
-      <%= f.password_field :password %><br><br>
+      <%= f.password_field :password %>
+      <div class="small-br"></div>
+      <div class="small-br"></div>
+
 
       <%= f.submit "新規登録" %>
 
     <% end %>
 
-    <p>
-      <%= link_to "ログイン", login_path %>
-    </p>
+    <div class="small-br"></div>
+    <%= link_to "ログイン", login_path %>
   </div>
 </div>
